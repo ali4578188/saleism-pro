@@ -25,6 +25,11 @@ jobs:
 
       - run: git checkout -- lib pubspec.yaml
 
+      # Patch Kotlin version in the freshly generated settings.gradle
+      # to a known-working version (fixes "unresolved Kotlin plugin version" errors)
+      - run: |
+          sed -i 's/id "org.jetbrains.kotlin.android" version "[^"]*"/id "org.jetbrains.kotlin.android" version "2.1.0"/' android/settings.gradle
+
       - run: flutter pub get
 
       - run: flutter build apk --release
