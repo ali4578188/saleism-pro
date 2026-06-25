@@ -19,6 +19,7 @@ jobs:
           flutter-version: '3.24.0'
           channel: 'stable'
       - run: flutter create --platforms=android --project-name=saleism_pro --org=com.saleismpro --overwrite .
+      - run: git checkout -- lib pubspec.yaml
       - run: flutter pub get
       - run: flutter build apk --release
       - uses: actions/upload-artifact@v4
