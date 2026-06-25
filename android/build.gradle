@@ -1,16 +1,4 @@
-buildscript {
-      ext.kotlin_version = '2.1.0'
-      repositories {
-          google()
-          mavenCentral()
-      }
-
-      dependencies {
-          classpath 'com.android.tools.build:gradle:8.5.0'
-          classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlin_version"
-      }
-  }
-
+// Top-level build file — plugin versions are declared in settings.gradle.
   allprojects {
       repositories {
           google()
