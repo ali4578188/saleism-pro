@@ -8,6 +8,7 @@ on:
 jobs:
   build:
     runs-on: ubuntu-latest
+
     steps:
       - uses: actions/checkout@v4
 
@@ -20,22 +21,19 @@ jobs:
         with:
           flutter-version: '3.27.4'
           channel: 'stable'
+          cache: true
 
-      - run: flutter create --platforms=android --project-name=saleism_pro --org=com.saleismpro --overwrite .
+      - name: Create required asset directories
+        run: mkdir -p assets/images
 
-      - run: git checkout -- lib pubspec.yaml
+      - name: Install dependencies
+        run: flutter pub get
 
-      # Patch Kotlin version in the freshly generated settings.gradle
-      # to a known-working version (fixes "unresolved Kotlin plugin version" errors)
-      - run: |
-          sed -i 's/id "org.jetbrains.kotlin.android" version "[^"]*"/id "org.jetbrains.kotlin.android" version "2.1.0"/' android/settings.gradle
-
-      - run: flutter pub get
-
-      - run: flutter build apk --release
+      - name: Build release APK
+        run: flutter build apk --release
 
       - uses: actions/upload-artifact@v4
         with:
           name: SALEISM-PRO-APK
-          path: build/app/outputs/flutter-apk
+          path: build/app/outputs/flutter-apk/app-release.apk
           retention-days: 30
