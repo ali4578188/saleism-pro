@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'package:mobile_scanner/mobile_scanner.dart';
 import '../../core/constants/app_colors.dart';
 import '../../providers/product_provider.dart';
 import '../../providers/company_provider.dart';
@@ -53,37 +52,6 @@ class _ProductFormState extends State<ProductForm> {
     super.dispose();
   }
 
-  Future<void> _scanBarcode() async {
-    final result = await showModalBottomSheet<String>(
-      context: context,
-      backgroundColor: AppColors.bgCard,
-      builder: (ctx) => SizedBox(
-        height: 300,
-        child: Column(
-          children: [
-            Padding(
-              padding: const EdgeInsets.all(16),
-              child: Row(children: [
-                const Text('Scan Barcode', style: TextStyle(color: AppColors.textPrimary, fontWeight: FontWeight.w700, fontSize: 16)),
-                const Spacer(),
-                IconButton(icon: const Icon(Icons.close, color: AppColors.textSecondary), onPressed: () => Navigator.pop(ctx)),
-              ]),
-            ),
-            Expanded(
-              child: MobileScanner(
-                onDetect: (capture) {
-                  final code = capture.barcodes.first.rawValue;
-                  if (code != null) Navigator.pop(ctx, code);
-                },
-              ),
-            ),
-          ],
-        ),
-      ),
-    );
-    if (result != null && mounted) setState(() => _barcode.text = result);
-  }
-
   Future<void> _save() async {
     if (!_formKey.currentState!.validate()) return;
     setState(() => _saving = true);
@@ -131,25 +99,7 @@ class _ProductFormState extends State<ProductForm> {
           children: [
             _sectionHeader('Basic Info'),
             _field('Product Name *', _name, required: true),
-            Row(
-              children: [
-                Expanded(child: _field('Barcode', _barcode)),
-                const SizedBox(width: 8),
-                Container(
-                  margin: const EdgeInsets.only(bottom: 16),
-                  child: ElevatedButton(
-                    onPressed: _scanBarcode,
-                    style: ElevatedButton.styleFrom(
-                      backgroundColor: AppColors.bgCard,
-                      foregroundColor: AppColors.primaryOrange,
-                      minimumSize: const Size(52, 52),
-                      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12), side: const BorderSide(color: AppColors.border)),
-                    ),
-                    child: const Icon(Icons.qr_code_scanner, size: 24),
-                  ),
-                ),
-              ],
-            ),
+            _field('Barcode (optional)', _barcode),
 
             // Company dropdown
             Padding(
