@@ -4,8 +4,8 @@ publish_to: 'none'
 version: 1.0.0+1
 
 environment:
-  sdk: '>=3.3.0 <4.0.0'
-  flutter: ">=3.19.0"
+  sdk: '>=3.0.0 <4.0.0'
+  flutter: ">=3.10.0"
 
 dependencies:
   flutter:
@@ -32,9 +32,6 @@ dependencies:
 
   # Sharing
   share_plus: ^9.0.0
-
-  # Barcode Scanner
-  mobile_scanner: ^5.2.3
 
   # Biometric Auth
   local_auth: ^2.2.0
