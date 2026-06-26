@@ -17,11 +17,10 @@ jobs:
           distribution: 'zulu'
           java-version: '17'
 
-      - uses: subosito/flutter-action@v2
-        with:
-          flutter-version: '3.24.3'
-          channel: 'stable'
-          cache: false
+      - name: Install Flutter
+        run: |
+          git clone https://github.com/flutter/flutter.git --branch stable --single-branch $HOME/flutter
+          echo "$HOME/flutter/bin" >> $GITHUB_PATH
 
       - name: Verify Flutter version
         run: flutter --version
