@@ -1,15 +1,15 @@
-pluginManagement {
-      repositories {
-          google()
-          mavenCentral()
-          gradlePluginPortal()
-      }
-  }
+include ':app'
 
-  plugins {
-      id "com.android.application" version "8.3.2" apply false
-      id "org.jetbrains.kotlin.android" version "1.9.22" apply false
-  }
+def localPropertiesFile = new File(rootProject.projectDir, "local.properties")
+def properties = new Properties()
 
-  include ":app"
-  
+if (localPropertiesFile.exists()) {
+    localPropertiesFile.withReader("UTF-8") { reader -> properties.load(reader) }
+}
+
+def flutterSdkPath = properties.getProperty("flutter.sdk")
+if (flutterSdkPath == null) {
+    flutterSdkPath = System.env.FLUTTER_ROOT
+}
+assert flutterSdkPath != null, "Flutter SDK not found. Set flutter.sdk in local.properties or FLUTTER_ROOT env."
+apply from: "$flutterSdkPath/packages/flutter_tools/gradle/app_plugin_loader.gradle"
