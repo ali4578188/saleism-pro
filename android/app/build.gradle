@@ -1,3 +1,9 @@
+plugins {
+    id 'com.android.application'
+    id 'kotlin-android'
+    id 'dev.flutter.flutter-gradle-plugin'
+}
+
 def localProperties = new Properties()
 def localPropertiesFile = rootProject.file('local.properties')
 if (localPropertiesFile.exists()) {
@@ -6,27 +12,15 @@ if (localPropertiesFile.exists()) {
     }
 }
 
-def flutterRoot = localProperties.getProperty('flutter.sdk')
-if (flutterRoot == null) {
-    flutterRoot = System.env.FLUTTER_ROOT
-}
-if (flutterRoot == null) {
-    throw new GradleException("Flutter SDK not found. Set flutter.sdk in local.properties or FLUTTER_ROOT env.")
-}
-
 def flutterVersionCode = localProperties.getProperty('flutter.versionCode')
 if (flutterVersionCode == null) { flutterVersionCode = '1' }
 
 def flutterVersionName = localProperties.getProperty('flutter.versionName')
 if (flutterVersionName == null) { flutterVersionName = '1.0.0' }
 
-apply plugin: 'com.android.application'
-apply plugin: 'kotlin-android'
-apply from: "$flutterRoot/packages/flutter_tools/gradle/flutter.gradle"
-
 android {
-    namespace "com.saleismpro.app"
-    compileSdkVersion flutter.compileSdkVersion
+    namespace 'com.saleismpro.app'
+    compileSdk flutter.compileSdkVersion
     ndkVersion flutter.ndkVersion
 
     compileOptions {
@@ -43,9 +37,9 @@ android {
     }
 
     defaultConfig {
-        applicationId "com.saleismpro.app"
-        minSdkVersion 23
-        targetSdkVersion flutter.targetSdkVersion
+        applicationId 'com.saleismpro.app'
+        minSdk 23
+        targetSdk flutter.targetSdkVersion
         versionCode flutterVersionCode.toInteger()
         versionName flutterVersionName
     }
@@ -61,8 +55,4 @@ android {
 
 flutter {
     source '../..'
-}
-
-dependencies {
-    implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
 }
