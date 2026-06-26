@@ -17,22 +17,30 @@ jobs:
           distribution: 'zulu'
           java-version: '17'
 
-      - name: Install Flutter
+      - name: Install Flutter 3.22.3
         run: |
-          git clone https://github.com/flutter/flutter.git --branch stable --single-branch $HOME/flutter
+          curl -fsSL "https://storage.googleapis.com/flutter_infra_release/releases/stable/linux/flutter_linux_3.22.3-stable.tar.xz" -o /tmp/flutter.tar.xz
+          tar xf /tmp/flutter.tar.xz -C $HOME
           echo "$HOME/flutter/bin" >> $GITHUB_PATH
 
-      - name: Verify Flutter version
-        run: flutter --version
+      - name: Verify Flutter & Dart version
+        run: |
+          export PATH="$HOME/flutter/bin:$PATH"
+          flutter --version
+          dart --version
 
       - name: Create required asset directories
         run: mkdir -p assets/images
 
       - name: Install dependencies
-        run: flutter pub get
+        run: |
+          export PATH="$HOME/flutter/bin:$PATH"
+          flutter pub get
 
       - name: Build release APK
-        run: flutter build apk --release
+        run: |
+          export PATH="$HOME/flutter/bin:$PATH"
+          flutter build apk --release
 
       - uses: actions/upload-artifact@v4
         with:
