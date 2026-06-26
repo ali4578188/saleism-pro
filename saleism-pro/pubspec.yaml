@@ -5,7 +5,7 @@ version: 1.0.0+1
 
 environment:
   sdk: '>=3.0.0 <4.0.0'
-  flutter: ">=3.10.0"
+  flutter: ">=3.19.0"
 
 dependencies:
   flutter:
@@ -14,7 +14,7 @@ dependencies:
 
   # Database
   sqflite: ^2.3.3
-  path: ">=1.8.3 <3.0.0"
+  path: ^1.9.0
   path_provider: ^2.1.3
 
   # State Management
@@ -31,7 +31,7 @@ dependencies:
   excel: ^4.0.3
 
   # Sharing
-  share_plus: ^9.0.0
+  share_plus: ^10.0.0
 
   # Biometric Auth
   local_auth: ^2.2.0

@@ -71,7 +71,6 @@ class DatabaseHelper {
         name TEXT NOT NULL,
         company_id INTEGER,
         category TEXT,
-        barcode TEXT UNIQUE,
         mrp REAL DEFAULT 0,
         purchase_rate REAL DEFAULT 0,
         sale_rate REAL DEFAULT 0,
