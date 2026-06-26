@@ -7,18 +7,12 @@ class AppColors {
   static const Color primaryOrangeLight = Color(0xFFFF8C38);
   static const Color accent = Color(0xFFFF9A3C);
 
-  // Aliases for primaryOrangeDark
-  static const Color orangeDark = primaryOrangeDark;
-
   // Background Colors
   static const Color bgDark = Color(0xFF0A0A0A);
   static const Color bgCard = Color(0xFF1A1A1A);
   static const Color bgCardLight = Color(0xFF222222);
   static const Color bgInput = Color(0xFF1E1E1E);
   static const Color bgSurface = Color(0xFF141414);
-
-  // bgBlack alias for bgDark
-  static const Color bgBlack = bgDark;
 
   // Text Colors
   static const Color textPrimary = Color(0xFFFFFFFF);
@@ -33,11 +27,6 @@ class AppColors {
   static const Color error = Color(0xFFFF1744);
   static const Color errorDark = Color(0xFFB71C1C);
   static const Color info = Color(0xFF00B0FF);
-
-  // Semantic aliases
-  static const Color profitGreen = success;
-  static const Color lossRed = error;
-  static const Color creditYellow = warning;
 
   // Border / Divider
   static const Color border = Color(0xFF2C2C2C);
